@@ -33,11 +33,19 @@ body {
     display: grid;
     border: 2px solid var(--grid-border);
     background: #fffdf8;
+    ;
+}
+.grid:hover {
+    cursor: crosshair;
 }
 
 .cell {
     border: 1px solid var(--cell-border);
     background: #fffdf8;
+}
+
+.cell.is-drawn {
+    background: #1f1f1f;
 }
 
 @media (max-width: 720px) {
