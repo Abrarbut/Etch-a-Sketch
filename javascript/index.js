@@ -14,13 +14,23 @@ for (let i = 0; i < totalCells; i += 1) {
 
 grid.addEventListener("mouseenter", (event) => {
   const target = event.target;
-  if(event.ctrlKey) return;
-  if (target instanceof HTMLElement && target.classList.contains("cell")) {
-    target.classList.add("is-drawn");
+
+  if (!(target instanceof HTMLElement)) return;
+  if (!target.classList.contains("cell")) return;
+
+  if (event.ctrlKey) return;
+
+  if (event.altKey) {
+    target.classList.remove("is-drawn");
+    return;
   }
+
+  target.classList.add("is-drawn");
+
 }, true);
 
-const resetButton = document.querySelector("#reset"); 
+
+const resetButton = document.querySelector("#reset");
 resetButton.addEventListener("click", () => {
   const cells = document.querySelectorAll(".cell");
   cells.forEach((cell) => {
@@ -32,14 +42,14 @@ const resizeButton = document.querySelector("#resize");
 
 resizeButton.addEventListener("click", () => {
   let newSize = prompt("Enter new grid size (1-100):");
-  newSize = parseInt(newSize, 10);  
+  newSize = parseInt(newSize, 10);
   if (isNaN(newSize) || newSize < 1 || newSize > 100) {
     alert("Invalid size. Please enter a number between 1 and 100.");
     return;
-  }   
+  }
   grid.style.gridTemplateColumns = `repeat(${newSize}, 1fr)`;
   grid.style.gridTemplateRows = `repeat(${newSize}, 1fr)`;
-  grid.innerHTML = ""; 
+  grid.innerHTML = "";
   const newTotalCells = newSize * newSize;
   for (let i = 0; i < newTotalCells; i += 1) {
     const cell = document.createElement("div");
