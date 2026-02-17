@@ -14,7 +14,7 @@ for (let i = 0; i < totalCells; i += 1) {
 
 grid.addEventListener("mouseenter", (event) => {
   const target = event.target;
-
+  if(event.ctrlKey) return;
   if (target instanceof HTMLElement && target.classList.contains("cell")) {
     target.classList.add("is-drawn");
   }
