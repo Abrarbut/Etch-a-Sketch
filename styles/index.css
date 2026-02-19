@@ -1,9 +1,13 @@
 :root {
     --grid-size: 540px;
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --accent-color: #f093fb;
     --grid-border: #1e1e1e;
-    --cell-border: #d9d9d9;
-    --page-bg: #f3f1ea;
+    --cell-bg: #ffffff;
+    --page-bg: #f8f9fa;
     --panel-bg: #ffffff;
+    --hover-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
 }
 
 * {
@@ -13,68 +17,233 @@
 body {
     margin: 0;
     min-height: 100vh;
-    display: grid;
-    place-items: center;
-    background: radial-gradient(circle at 20% 20%, #fff8e1, var(--page-bg));
-    font-family: "Georgia", "Times New Roman", serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: #1f1f1f;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.heading {
+    font-size: 3.5rem;
+    margin: 0;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeInScale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    font-weight: 700;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.instructions {
+    background: var(--panel-bg);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    animation: slideInDown 0.6s ease-out;
+}
+
+.instructions h2 {
+    margin: 0 0 15px 0;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.instructions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.instructions li {
+    padding: 8px 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+@keyframes slideInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-reset {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.btn-reset:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+}
+
+.btn-reset:active {
+    transform: translateY(-1px);
+}
+
+.btn-resize {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-resize:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.btn-resize:active {
+    transform: translateY(-1px);
 }
 
 .frame {
     background: var(--panel-bg);
-    padding: 32px;
-    border: 2px solid var(--grid-border);
-    box-shadow: 0 24px 40px rgba(0, 0, 0, 0.12);
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.7s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .grid {
     width: var(--grid-size);
     height: var(--grid-size);
-    display: grid;
-    border: 2px solid var(--grid-border);
-    background: #fffdf8;
-    ;
+    display: flex;
+    flex-wrap: wrap;
+    border: 3px solid var(--grid-border);
+    background: #f0f0f0;
+    gap: 0;
+    border-radius: 8px;
+    overflow: hidden;
 }
+
 .grid:hover {
     cursor: crosshair;
 }
 
 .cell {
-    border: 1px solid var(--cell-border);
-    background: #fffdf8;
+    flex: 1 1 calc(100% / 16);
+    aspect-ratio: 1;
+    background: var(--cell-bg);
+    border: 1px solid #e0e0e0;
+    transition: all 0.1s ease;
+    cursor: crosshair;
+}
+
+.cell:hover {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .cell.is-drawn {
     background: #1f1f1f;
 }
 
-@media (max-width: 720px) {
+/* Responsive design */
+@media (max-width: 768px) {
     :root {
-        --grid-size: 80vw;
+        --grid-size: 70vw;
+    }
+
+    .heading {
+        font-size: 2rem;
     }
 
     .frame {
-        padding: 20px;
+        padding: 15px;
+    }
+
+    .instructions {
+        padding: 15px;
+    }
+
+    .instructions h2 {
+        font-size: 1.2rem;
+    }
+
+    .instructions li {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
     }
 }
 
-.button {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    margin-top: 20px;
-}
-.button button {
-    padding: 10px 20px;
-    border: none;
-    background: var(--panel-bg);
-    border: 2px solid var(--grid-border);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
-}
-.button button:hover {
-    background: var(--grid-border);
-    color: var(--panel-bg);
+@media (max-width: 480px) {
+    :root {
+        --grid-size: 85vw;
+    }
+
+    .container {
+        gap: 15px;
+    }
+
+    .heading {
+        font-size: 1.5rem;
+    }
+
+    .controls {
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        font-size: 0.8rem;
+    }
 }

@@ -7,13 +7,33 @@
 		<link rel="stylesheet" href="styles/index.css" />
 	</head>
 	<body>
-		<div class="frame">
-			<div id="grid" class="grid" aria-label="16 by 16 grid"></div>
+		<div class="container">
+			<h1 class="heading">✨ Etch-a-Sketch ✨</h1>
+			
+			<div class="instructions">
+				<h2>How to Use:</h2>
+				<ul>
+					<li>🖱️ <strong>Hover</strong> over the grid squares to draw with your cursor</li>
+					<li>Each square shows a <strong>progressive darkening effect</strong> (10% darker per interaction)</li>
+					<li>Colors are <strong>randomized</strong> with each interaction for a fun artistic effect</li>
+					<li>⌨️ Press <strong>'D'</strong> to enter <strong>Draw Mode</strong> (default mode)</li>
+					<li>⌨️ Press <strong>'E'</strong> to toggle <strong>Erase Mode</strong> - remove drawn parts with your cursor</li>
+					<li>⌨️ Press <strong>'Q'</strong> to toggle <strong>Pause Mode</strong> - cursor won't draw or erase</li>
+					<li>🔘 Click <strong>Resize</strong> to change the grid size (1-100 squares per side)</li>
+					<li>🔄 Click <strong>Reset</strong> to clear the canvas and start fresh</li>
+				</ul>
+			</div>
+
+			<div class="controls">
+				<button id="reset" class="btn btn-reset">🔄 Reset</button>
+				<button id="resize" class="btn btn-resize">📐 Resize Grid</button>
+			</div>
+
+			<div class="frame">
+				<div id="grid" class="grid" aria-label="Etch-a-Sketch drawing grid"></div>
+			</div>
 		</div>
-		<div class="button">
-			<button id="reset" class="button">Reset</button>
-			<button id="resize" class="button">Resize</button>
-		</div>
+
 		<script src="javascript/index.js"></script>
 	</body>
 </html>
